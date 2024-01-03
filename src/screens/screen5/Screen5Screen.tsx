@@ -1,21 +1,24 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useContext } from 'react'
-import { MyContext } from '../../context/Provider'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import React from 'react'
+import { useMyContext } from '../../hooks'
+import { Button } from '../../components'
 
 const Screen5Screen = ({ navigation }: any) => {
-    const context = useContext(MyContext)
+    const context: any = useMyContext()
 
     return (
-        <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-            {/* <TouchableOpacity onPress={() => navigation.navigate("Screen2")}>
-                <Text style={{ color: "black" }}>Next</Text>
-            </TouchableOpacity> */}
-
-            <TouchableOpacity onPress={() => context.setScreenName({ screenName: "screen5", isVisible: true })}>
-                <Text style={{ color: "black" }}>Display Toast</Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
+            <Button onPress={() => context.setScreenName({ screenName: "screen5", isVisible: true })} label="Display Toast" />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    }
+})
 
 export default Screen5Screen

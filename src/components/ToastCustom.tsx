@@ -1,38 +1,26 @@
-import { View, Text } from 'react-native';
-import React, { useEffect, useState, useContext } from 'react';
-import { MyContext } from '../context/Provider';
+import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useMyContext, useToastDisplay } from '../hooks';
 
 const ToastCustom = () => {
-    const context = useContext(MyContext);
-    const [displayName, setDisplayName] = useState('');
-    const [visible, setVisible] = useState(false);
-    const [timer, setTimer] = useState(null);
+    const { displayName, visible } = useToastDisplay();
 
-    useEffect(() => {
-        const { screenName, isVisible } = context;
-
-        if (isVisible) {
-            setDisplayName(screenName);
-            setVisible(true);
-
-            if (timer) {
-                clearTimeout(timer); // Clear previous timer if it exists
-            }
-
-            const newTimer = setTimeout(() => {
-                setVisible(false);
-                context.setScreenName({ screenName: '', isVisible: false });
-            }, 5000);
-
-            setTimer(newTimer);
-        }
-    }, [context]);
 
     return (
-        <View style={{ display: visible ? 'flex' : 'none', position: 'absolute', bottom: 0 }}>
-            <Text style={{ color: 'black' }}>{displayName}</Text>
+        <View style={[styles.container, { display: visible ? 'flex' : 'none' }]}>
+            <Text style={{ color: 'white' }}>{displayName}</Text>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: "black",
+        width: "100%",
+        alignItems: "center",
+    }
+})
 
 export default ToastCustom;

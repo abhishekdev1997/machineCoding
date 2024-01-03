@@ -1,20 +1,25 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useContext, useEffect } from 'react'
-import { MyContext } from '../../context/Provider'
+import { StyleSheet, View } from 'react-native'
+import React from 'react'
+import { Button } from '../../components'
+import { useMyContext } from '../../hooks'
 
 const Screen2Screen = ({ navigation }: any) => {
-    const context = useContext(MyContext)
+    const context: any = useMyContext()
 
     return (
-        <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-            <TouchableOpacity onPress={() => navigation.navigate("Screen3")}>
-                <Text style={{ color: "black" }}>Next</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => context.setScreenName({ screenName: "Screen2", isVisible: true })}>
-                <Text style={{ color: "black" }}>Display Toast</Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
+            <Button onPress={() => navigation.navigate("Screen3")} label="Next" />
+            <Button onPress={() => context.setScreenName({ screenName: "screen2", isVisible: true })} label="Display Toast" />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    }
+})
 
 export default Screen2Screen
