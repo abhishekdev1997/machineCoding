@@ -43,18 +43,11 @@ function App(): React.JSX.Element {
     console.log("testFun");
   }, [])
 
-  const context = useContext(MyContext);
-
-  useEffect(() => {
-    console.log("app", context)
-    setIsVisible(true);
-    setKeyCounter(keyCounter + 1);
-  }, [context.isVisible])
 
   return (
     <SafeAreaView style={styles.container}>
       <AppNavigator />
-      <ToastCustom message='Screen1' isVisible={isVisible} keyCounter={keyCounter} />
+      <ToastCustom />
     </SafeAreaView>
   );
 }
